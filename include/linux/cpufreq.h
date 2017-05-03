@@ -129,7 +129,6 @@ struct cpufreq_policy {
 	bool			dvfs_possible_from_any_cpu;
 
 	 /* Cached frequency lookup from cpufreq_driver_resolve_freq. */
->>>>>>> 16b5592... cpufreq: Process remote callbacks from any CPU if the platform permits
 	unsigned int cached_target_freq;
 	int cached_resolved_idx;
 
