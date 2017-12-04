@@ -2170,3 +2170,13 @@ walt_task_in_cum_window_demand(struct rq *rq, struct task_struct *p)
 #define perf_domain_span(pd) NULL
 #endif
 #endif
+
+static inline unsigned long cpu_util_dl(struct rq *rq)
+{
+	return (rq->dl.running_bw * SCHED_CAPACITY_SCALE) >> BW_SHIFT;
+}
+
+static inline unsigned long cpu_util_cfs(struct rq *rq)
+{
+	return rq->cfs.avg.util_avg;
+}
