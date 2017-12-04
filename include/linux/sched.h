@@ -3081,6 +3081,8 @@ static inline void unlock_task_sighand(struct task_struct *tsk,
 	spin_unlock_irqrestore(&tsk->sighand->siglock, *flags);
 }
 
+extern int sched_setattr_nocheck(struct task_struct *, const struct sched_attr *);
+
 /**
  * threadgroup_change_begin - mark the beginning of changes to a threadgroup
  * @tsk: task causing the changes
