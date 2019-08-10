@@ -1162,10 +1162,10 @@ static enum hrtimer_restart inactive_task_timer(struct hrtimer *timer)
 						     struct sched_dl_entity,
 						     inactive_timer);
 	struct task_struct *p = dl_task_of(dl_se);
-	struct rq_flags rf;
+	unsigned long flags;
 	struct rq *rq;
 
-	rq = task_rq_lock(p, &rf);
+	rq = task_rq_lock(p, &flags);
 
 	sched_clock_tick();
 	update_rq_clock(rq);
@@ -1195,7 +1195,7 @@ static enum hrtimer_restart inactive_task_timer(struct hrtimer *timer)
 	sub_running_bw(dl_se, &rq->dl);
 	dl_se->dl_non_contending = 0;
 unlock:
-	task_rq_unlock(rq, p, &rf);
+	task_rq_unlock(rq, p, &flags);
 	put_task_struct(p);
 
 	return HRTIMER_NORESTART;
